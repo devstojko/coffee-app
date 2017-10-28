@@ -1,9 +1,9 @@
-.App {
+.app {
   display: flex;
   flex-direction: column;
 }
 
-.AppContent {
+.appContent {
   display: flex;
   flex-direction: row;
 }
