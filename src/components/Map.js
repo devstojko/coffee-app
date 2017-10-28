@@ -10,8 +10,8 @@ import style from "./Map.css";
 const Map = withScriptjs(
   withGoogleMap(props => (
     <GoogleMap
-      defaultZoom={8}
-      defaultCenter={{ lat: 44.662628, lng: 20.8558253 }}
+      defaultZoom={12}
+      defaultCenter={{ lat: 44.786567999999995, lng: 20.4489216 }}
     >
       {props.isMarkerShown && (
         <div>
