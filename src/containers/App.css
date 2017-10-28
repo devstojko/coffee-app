@@ -1,8 +1,9 @@
-body {
-  margin: 0;
-  padding: 0;
+.App {
+  display: flex;
+  flex-direction: column;
 }
 
-.test {
-  background-color: red;
+.AppContent {
+  display: flex;
+  flex-direction: row;
 }
