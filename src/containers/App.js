@@ -5,6 +5,8 @@ import Header from "../components/Header";
 import Listing from "../components/Listing";
 import Map from "../components/Map";
 
+import getLocation from "../utils/geolocationAPI";
+
 import style from "./App.css";
 
 const foursquare = require("react-foursquare")({
@@ -23,9 +25,14 @@ export default class App extends Component {
   };
 
   componentDidMount = () => {
+    getLocation();
     foursquare.venues.getVenues(params).then(res => {
       console.log(res);
     });
+  };
+
+  showLocation = () => {
+    getLocation();
   };
 
   render() {
@@ -42,6 +49,7 @@ export default class App extends Component {
             mapElement={<div style={{ height: `100%` }} />}
           />
         </div>
+        <button onClick={this.showLocation}>get location</button>
       </div>
     );
   }
