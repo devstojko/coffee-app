@@ -7,7 +7,7 @@
 
 .ListingHeader {
   padding: 20px;
-  background-color: color(blue alpha(20%));
+  background-color: color(red alpha(20%));
 }
 
 .ListingContent {

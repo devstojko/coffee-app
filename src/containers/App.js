@@ -17,6 +17,7 @@ const foursquare = require("react-foursquare")({
 export default class App extends Component {
   state = {
     items: [],
+    ll: {},
     waitingPermission: true,
     locationError: false
   };
@@ -33,9 +34,14 @@ export default class App extends Component {
             sortByDistance: 1
           })
           .then(res => {
+            console.log(res);
             this.setState({
               items: res.response.groups[0].items,
-              waitingPermission: false
+              waitingPermission: false,
+              ll: {
+                lat: position.coords.latitude,
+                lng: position.coords.longitude
+              }
             });
           });
       })
@@ -61,6 +67,8 @@ export default class App extends Component {
             <Listing items={this.state.items} />
             <div style={{ width: "100%" }}>
               <Map
+                userPosition={this.state.ll}
+                marker={this.state.items}
                 isMarkerShown
                 googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places"
                 loadingElement={
