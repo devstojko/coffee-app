@@ -5,24 +5,49 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const common = require("./webpack.common.js");
 const BrowserSyncPlugin = require("browser-sync-webpack-plugin");
 
-const BUILD = path.join(__dirname, "build");
-const HOST = process.env.HOST || "localhost";
+const HOST = process.env.HOST || "0.0.0.0";
 const PORT = process.env.PORT || 8080;
-const PROXY = `https://${HOST}:${PORT}`;
+const PROXY = `http://${HOST}:${PORT}`;
 
 module.exports = merge(common, {
-  devtool: "inline-source-map",
+  module: {
+    rules: [
+      {
+        test: /\.css$/,
+        exclude: /node_modules/,
+        use: [
+          "style-loader",
+
+          {
+            loader: "css-loader",
+            options: {
+              importLoaders: 1,
+              modules: true,
+              localIdentName: "[name]__[local]__[hash:base64:5]"
+            }
+          },
+          {
+            loader: "postcss-loader",
+            options: {
+              ident: "postcss",
+              plugins: () => [
+                postcssCssnext({
+                  features: {
+                    autoprefixer: {
+                      grid: false,
+                      browsers: ["> 1%", "last 2 versions"]
+                    }
+                  }
+                })
+              ]
+            }
+          }
+        ]
+      }
+    ]
+  },
   devServer: {
-    historyApiFallback: true,
-    hot: true,
-    inline: true,
-    progress: true,
-
-    stats: "errors-only",
-    https: true,
-
-    host: HOST,
-    port: PORT
+    hot: true
   },
   plugins: [
     new HtmlWebpackPlugin({
@@ -30,21 +55,21 @@ module.exports = merge(common, {
       filename: "index.html",
       inject: "body"
     }),
-    new BrowserSyncPlugin(
-      // BrowserSync options
-      {
-        host: HOST,
-        port: PORT,
-        proxy: PROXY,
-        https: true
-      },
-      // plugin options
-      {
-        // prevent BrowserSync from reloading the page
-        // and let Webpack Dev Server take care of this
-        reload: false
-      }
-    ),
+    // new BrowserSyncPlugin(
+    //   // BrowserSync options
+    //   {
+    //     host: HOST,
+    //     port: PORT,
+    //     proxy: PROXY
+    //   },
+    //   // plugin options
+    //   {
+    //     // prevent BrowserSync from reloading the page
+    //     // and let Webpack Dev Server take care of this
+    //     reload: false
+    //   }
+    // ),
+    new webpack.NamedModulesPlugin(),
     new webpack.HotModuleReplacementPlugin()
   ]
 });

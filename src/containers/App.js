@@ -6,7 +6,7 @@ import Listing from "../components/Listing";
 import Map from "../components/Map";
 
 import getLocation from "../utils/geolocationAPI";
-
+import "./App.css";
 import style from "./App.css";
 
 const foursquare = require("react-foursquare")({
@@ -58,12 +58,12 @@ export default class App extends Component {
   render() {
     // console.log(this.state.items);
     return (
-      <div className={style.app}>
+      <div className={style.App}>
         <Header />
         {this.state.waitingPermission ? (
           <p>Loading...</p>
         ) : !this.state.locationError ? (
-          <div className={style.appContent}>
+          <div className={style.AppContent}>
             <Listing items={this.state.items} />
             <div style={{ width: "100%" }}>
               <Map

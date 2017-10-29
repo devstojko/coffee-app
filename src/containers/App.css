@@ -2,12 +2,12 @@ body {
   margin: 0;
 }
 
-.app {
+.App {
   display: flex;
   flex-direction: column;
 }
 
-.appContent {
+.AppContent {
   display: flex;
   flex-direction: row;
 }
