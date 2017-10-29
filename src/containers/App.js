@@ -15,8 +15,9 @@ const foursquare = require("react-foursquare")({
 });
 
 const params = {
-  ll: "44.662628,20.8558253",
-  categories: "coffee"
+  ll: "44.663770,20.929536",
+  categoryId: "4bf58dd8d48988d1e0931735",
+  limit: 10
 };
 
 export default class App extends Component {
@@ -26,8 +27,9 @@ export default class App extends Component {
 
   componentDidMount = () => {
     getLocation();
-    foursquare.venues.getVenues(params).then(res => {
-      console.log(res);
+    foursquare.venues.explore(params).then(res => {
+      console.log(res.response.groups[0].items[0].tips[0].photo);
+      this.setState({ items: res.response.groups[0].items });
     });
   };
 
@@ -36,20 +38,40 @@ export default class App extends Component {
   };
 
   render() {
+    // console.log(this.state.items);
     return (
-      <div className={style.App}>
+      <div className={style.app}>
         <Header />
-        <div className={style.AppContent}>
-          <Listing />
-          <Map
-            isMarkerShown
-            googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places"
-            loadingElement={<div style={{ height: `100%` }} />}
-            containerElement={<div style={{ height: `400px` }} />}
-            mapElement={<div style={{ height: `100%` }} />}
-          />
+        <div className={style.appContent}>
+          <Listing items={this.state.items} />
+          <div style={{ width: "100%" }}>
+            <Map
+              isMarkerShown
+              googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places"
+              loadingElement={
+                <div
+                  style={{
+                    height: `100%`
+                  }}
+                />
+              }
+              containerElement={
+                <div
+                  style={{
+                    height: `100%`
+                  }}
+                />
+              }
+              mapElement={
+                <div
+                  style={{
+                    height: `100%`
+                  }}
+                />
+              }
+            />
+          </div>
         </div>
-        <button onClick={this.showLocation}>get location</button>
       </div>
     );
   }
