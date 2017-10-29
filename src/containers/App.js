@@ -14,10 +14,13 @@ const foursquare = require("react-foursquare")({
   clientSecret: "LZBHTB3GPV14Q15UV3PFBERVNHIBRWYCNZABEWGGUKAQKBQQ"
 });
 
+const myCurrLocation = "44.6632695,20.935169";
+
 const params = {
-  ll: "44.663770,20.929536",
+  ll: myCurrLocation,
   categoryId: "4bf58dd8d48988d1e0931735",
-  limit: 10
+  limit: 10,
+  radius: 1000
 };
 
 export default class App extends Component {
@@ -28,7 +31,7 @@ export default class App extends Component {
   componentDidMount = () => {
     getLocation();
     foursquare.venues.explore(params).then(res => {
-      console.log(res.response.groups[0].items[0].tips[0].photo);
+      console.log(res.response.groups[0].items[0]);
       this.setState({ items: res.response.groups[0].items });
     });
   };

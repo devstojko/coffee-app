@@ -1,9 +1,14 @@
 import React from "react";
 
+import style from "./ListingItem.css";
+
 const ListingItem = props => {
   return (
-    <div>
-      <span>{props.item.venue.name}</span>
+    <div className={style.listingItem}>
+      <div>
+        <p>{props.item.venue.name}</p>
+        <p>{props.item.venue.location.distance}m</p>
+      </div>
       {!props.item.hasOwnProperty("tips") ? (
         <p>no image</p>
       ) : props.item.tips[0].hasOwnProperty("photo") ? (

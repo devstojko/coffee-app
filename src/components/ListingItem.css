@@ -1,0 +1,10 @@
+:root {
+  --gray: gray(80);
+}
+
+.listingItem {
+  padding: 20px;
+  display: flex;
+  border-bottom: 1px solid color(black alpha(20%));
+  justify-content: space-between;
+}

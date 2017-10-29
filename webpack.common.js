@@ -1,8 +1,8 @@
 const path = require("path");
-const autoprefixer = require("autoprefixer");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const CleanWebpackPlugin = require("clean-webpack-plugin");
+const postcssCssnext = require("postcss-cssnext");
 
 const extractCSS = new ExtractTextPlugin("styles.css");
 
@@ -41,8 +41,13 @@ module.exports = {
               options: {
                 ident: "postcss",
                 plugins: () => [
-                  autoprefixer({
-                    browsers: ["> 1%", "last 2 versions"]
+                  postcssCssnext({
+                    features: {
+                      autoprefixer: {
+                        grid: false,
+                        browsers: ["> 1%", "last 2 versions"]
+                      }
+                    }
                   })
                 ]
               }

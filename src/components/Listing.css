@@ -1,5 +1,4 @@
 .Listing {
-  background-color: green;
   height: calc(100vh - 58px);
   overflow-y: scroll;
   width: 500px;
