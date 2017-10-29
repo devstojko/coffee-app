@@ -7,12 +7,11 @@ import {
 } from "react-google-maps";
 import style from "./Map.css";
 
+const myCurrLocation = "44.8186,20.4681";
+
 const Map = withScriptjs(
   withGoogleMap(props => (
-    <GoogleMap
-      defaultZoom={12}
-      defaultCenter={{ lat: 44.66377, lng: 20.929536 }}
-    >
+    <GoogleMap defaultZoom={12} defaultCenter={{ lat: 44.8186, lng: 20.4681 }}>
       {props.isMarkerShown && (
         <div>
           <Marker

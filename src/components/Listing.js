@@ -9,7 +9,12 @@ const Listing = props => {
     <ListingItem key={item.venue.id} item={item} />
   ));
 
-  return <div className={style.Listing}>{renderItems}</div>;
+  return (
+    <div className={style.Listing}>
+      <div className={style.ListingHeader}>sort components</div>
+      <div className={style.ListingContent}>{renderItems}</div>
+    </div>
+  );
 };
 
 export default Listing;

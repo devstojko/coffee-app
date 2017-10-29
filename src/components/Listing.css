@@ -1,5 +1,15 @@
 .Listing {
+  display: flex;
+  flex-direction: column;
   height: calc(100vh - 58px);
-  overflow-y: scroll;
   width: 500px;
+}
+
+.ListingHeader {
+  padding: 20px;
+  background-color: color(blue alpha(20%));
+}
+
+.ListingContent {
+  overflow-y: scroll;
 }

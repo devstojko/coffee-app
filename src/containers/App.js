@@ -14,30 +14,39 @@ const foursquare = require("react-foursquare")({
   clientSecret: "LZBHTB3GPV14Q15UV3PFBERVNHIBRWYCNZABEWGGUKAQKBQQ"
 });
 
-const myCurrLocation = "44.6632695,20.935169";
-
-const params = {
-  ll: myCurrLocation,
-  categoryId: "4bf58dd8d48988d1e0931735",
-  limit: 10,
-  radius: 1000
-};
-
 export default class App extends Component {
   state = {
-    items: []
+    items: [],
+    waitingPermission: true,
+    locationError: false
+  };
+
+  fetchLocation = () => {
+    getLocation()
+      .then(position => {
+        foursquare.venues
+          .explore({
+            ll: `${position.coords.latitude},${position.coords.longitude}`,
+            categoryId: "4bf58dd8d48988d1e0931735",
+            limit: 10,
+            radius: 5000,
+            sortByDistance: 1
+          })
+          .then(res => {
+            this.setState({
+              items: res.response.groups[0].items,
+              waitingPermission: false
+            });
+          });
+      })
+      .catch(err => {
+        console.error(err.message);
+        this.setState({ waitingPermission: false, locationError: true });
+      });
   };
 
   componentDidMount = () => {
-    getLocation();
-    foursquare.venues.explore(params).then(res => {
-      console.log(res.response.groups[0].items[0]);
-      this.setState({ items: res.response.groups[0].items });
-    });
-  };
-
-  showLocation = () => {
-    getLocation();
+    this.fetchLocation();
   };
 
   render() {
@@ -45,36 +54,42 @@ export default class App extends Component {
     return (
       <div className={style.app}>
         <Header />
-        <div className={style.appContent}>
-          <Listing items={this.state.items} />
-          <div style={{ width: "100%" }}>
-            <Map
-              isMarkerShown
-              googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places"
-              loadingElement={
-                <div
-                  style={{
-                    height: `100%`
-                  }}
-                />
-              }
-              containerElement={
-                <div
-                  style={{
-                    height: `100%`
-                  }}
-                />
-              }
-              mapElement={
-                <div
-                  style={{
-                    height: `100%`
-                  }}
-                />
-              }
-            />
+        {this.state.waitingPermission ? (
+          <p>Loading...</p>
+        ) : !this.state.locationError ? (
+          <div className={style.appContent}>
+            <Listing items={this.state.items} />
+            <div style={{ width: "100%" }}>
+              <Map
+                isMarkerShown
+                googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places"
+                loadingElement={
+                  <div
+                    style={{
+                      height: `100%`
+                    }}
+                  />
+                }
+                containerElement={
+                  <div
+                    style={{
+                      height: `100%`
+                    }}
+                  />
+                }
+                mapElement={
+                  <div
+                    style={{
+                      height: `100%`
+                    }}
+                  />
+                }
+              />
+            </div>
           </div>
-        </div>
+        ) : (
+          <p>It is necessary to allow your location in order to use App.</p>
+        )}
       </div>
     );
   }
