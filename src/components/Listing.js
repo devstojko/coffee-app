@@ -9,9 +9,16 @@ const Listing = props => {
     <ListingItem key={item.venue.id} item={item} />
   ));
 
+  const arrow = props.sortDist === "MAX" ? "↑" : "↓";
+  const arrow1 = props.sortExpe === "MAX" ? "↑" : "↓";
+
   return (
     <div className={style.Listing}>
-      <div className={style.ListingHeader}>sorting ss</div>
+      <div className={style.ListingHeader}>
+        <span>Sort by:</span>
+        <button onClick={props.sortDistance}>Distance {arrow}</button>
+        <button onClick={props.sortExpens}>Expensiveness {arrow1}</button>
+      </div>
       <div className={style.ListingContent}>{renderItems}</div>
     </div>
   );

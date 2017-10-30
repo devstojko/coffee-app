@@ -3,15 +3,17 @@ import { withRouter } from "react-router-dom";
 import style from "./ListingItem.css";
 
 const ListingItem = props => {
+  const { venue } = props.item;
   return (
-    <div
-      to={props.item.venue.id}
-      className={style.listingItem}
-      onClick={() => props.history.push(`/details/${props.item.venue.id}`)}
-    >
+    <div to={venue.id} className={style.listingItem}>
       <div>
-        <p>{props.item.venue.name}</p>
-        <p>{props.item.venue.location.distance} m</p>
+        <h3 onClick={() => props.history.push(`/details/${venue.id}`)}>
+          {venue.name}
+        </h3>
+        <p>Distance {venue.location.distance} m</p>
+        <p>
+          Expensiveness - {venue.price.currency} - {venue.price.tier}
+        </p>
       </div>
       {!props.item.hasOwnProperty("tips") ? (
         <p>no photo</p>

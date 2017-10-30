@@ -1,11 +1,14 @@
 export const foursquare = require("react-foursquare")({
-  clientID: "Q0203EYLNNSJORXIRDT40X1UKPYTDI0CQ0MB0VT1WCFYT0Z3",
-  clientSecret: "LZBHTB3GPV14Q15UV3PFBERVNHIBRWYCNZABEWGGUKAQKBQQ"
+  clientID: "HRG20YWHDPFHGBLOD2NKSGCLHFVMBBCVWZKYRZCWMLXRWEN1",
+  clientSecret: "IRMLCQ5WK4IS1H4U00EM4011R14LB5U2MJ3J1MVLBHI3UY42"
 });
 
-export const foursquareOptions = {
-  categoryId: "4bf58dd8d48988d1e0931735",
+const coffeeId = "4bf58dd8d48988d1e0931735";
+
+export const foursquareParams = {
+  categoryId: coffeeId,
   limit: 10,
-  radius: 5000,
+  radius: 2000,
+  openNow: 1,
   sortByDistance: 1
 };
