@@ -10,7 +10,7 @@ const ListingItem = props => {
         <p>{props.item.venue.location.distance} m</p>
       </div>
       {!props.item.hasOwnProperty("tips") ? (
-        <p>no image</p>
+        <p>no photo</p>
       ) : props.item.tips[0].hasOwnProperty("photo") ? (
         <img
           src={`${props.item.tips[0].photo.prefix}100x100${props.item.tips[0]

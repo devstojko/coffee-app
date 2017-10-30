@@ -1,12 +1,10 @@
 import React, { Component } from "react";
-import { Link, Route } from "react-router-dom";
-
+import { Route, Switch } from "react-router-dom";
 import Header from "../components/Header";
 import Listing from "../components/Listing";
-import Map from "../components/Map";
+import MapWithMarker from "../components/MapWithMarker";
 
 import getLocation from "../utils/geolocationAPI";
-import "./App.css";
 import style from "./App.css";
 
 const foursquare = require("react-foursquare")({
@@ -18,7 +16,7 @@ export default class App extends Component {
   state = {
     items: [],
     ll: {},
-    waitingPermission: true,
+    waitingGeoPermission: true,
     locationError: false
   };
 
@@ -34,10 +32,10 @@ export default class App extends Component {
             sortByDistance: 1
           })
           .then(res => {
-            console.log(res);
+            console.log(res.response.groups[0].items);
             this.setState({
               items: res.response.groups[0].items,
-              waitingPermission: false,
+              waitingGeoPermission: false,
               ll: {
                 lat: position.coords.latitude,
                 lng: position.coords.longitude
@@ -47,7 +45,7 @@ export default class App extends Component {
       })
       .catch(err => {
         console.error(err.message);
-        this.setState({ waitingPermission: false, locationError: true });
+        this.setState({ waitingGeoPermission: false, locationError: true });
       });
   };
 
@@ -59,39 +57,19 @@ export default class App extends Component {
     // console.log(this.state.items);
     return (
       <div className={style.App}>
+        <Switch>
+          <Route render={() => <h1>404</h1>} />
+        </Switch>
         <Header />
-        {this.state.waitingPermission ? (
+        {this.state.waitingGeoPermission ? (
           <p>Loading...</p>
         ) : !this.state.locationError ? (
           <div className={style.AppContent}>
             <Listing items={this.state.items} />
             <div style={{ width: "100%" }}>
-              <Map
+              <MapWithMarker
                 userPosition={this.state.ll}
                 marker={this.state.items}
-                isMarkerShown
-                googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places"
-                loadingElement={
-                  <div
-                    style={{
-                      height: `100%`
-                    }}
-                  />
-                }
-                containerElement={
-                  <div
-                    style={{
-                      height: `100%`
-                    }}
-                  />
-                }
-                mapElement={
-                  <div
-                    style={{
-                      height: `100%`
-                    }}
-                  />
-                }
               />
             </div>
           </div>
