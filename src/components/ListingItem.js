@@ -1,10 +1,14 @@
 import React from "react";
-
+import { withRouter } from "react-router-dom";
 import style from "./ListingItem.css";
 
 const ListingItem = props => {
   return (
-    <div className={style.listingItem}>
+    <div
+      to={props.item.venue.id}
+      className={style.listingItem}
+      onClick={() => props.history.push(`/details/${props.item.venue.id}`)}
+    >
       <div>
         <p>{props.item.venue.name}</p>
         <p>{props.item.venue.location.distance} m</p>
@@ -24,4 +28,4 @@ const ListingItem = props => {
   );
 };
 
-export default ListingItem;
+export default withRouter(ListingItem);

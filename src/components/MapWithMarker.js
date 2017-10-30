@@ -1,4 +1,5 @@
 import React from "react";
+import { withRouter } from "react-router-dom";
 import { compose, withProps } from "recompose";
 import {
   withScriptjs,
@@ -8,6 +9,7 @@ import {
 } from "react-google-maps";
 
 const MapWithMarker = compose(
+  withRouter,
   withProps({
     googleMapURL:
       "https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places",
@@ -34,7 +36,13 @@ const MapWithMarker = compose(
       const lat = item.venue.location.lat;
       const lng = item.venue.location.lng;
       const id = item.venue.id;
-      return <Marker key={id} position={{ lat, lng }} />;
+      return (
+        <Marker
+          key={id}
+          position={{ lat, lng }}
+          onClick={() => props.history.push(`/details/${id}`)}
+        />
+      );
     })}
   </GoogleMap>
 ));
