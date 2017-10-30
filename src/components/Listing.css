@@ -1,7 +1,7 @@
 .Listing {
   display: flex;
   flex-direction: column;
-  height: calc(100vh - 58px);
+  height: 100vh;
   width: 500px;
 }
 

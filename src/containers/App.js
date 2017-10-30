@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Route, Switch } from "react-router-dom";
+import { Route, Switch, Link, Redirect, withRouter } from "react-router-dom";
 import Header from "../components/Header";
 import Listing from "../components/Listing";
 import MapWithMarker from "../components/MapWithMarker";
@@ -12,7 +12,11 @@ const foursquare = require("react-foursquare")({
   clientSecret: "LZBHTB3GPV14Q15UV3PFBERVNHIBRWYCNZABEWGGUKAQKBQQ"
 });
 
-export default class App extends Component {
+function ErrorMessage() {
+  return <h2>Allow Application to use your location.</h2>;
+}
+
+class App extends Component {
   state = {
     items: [],
     ll: {},
@@ -45,7 +49,8 @@ export default class App extends Component {
       })
       .catch(err => {
         console.error(err.message);
-        this.setState({ waitingGeoPermission: false, locationError: true });
+        this.props.history.push("/error");
+        // this.setState({ waitingGeoPermission: false, locationError: true });
       });
   };
 
@@ -57,13 +62,7 @@ export default class App extends Component {
     // console.log(this.state.items);
     return (
       <div className={style.App}>
-        <Switch>
-          <Route render={() => <h1>404</h1>} />
-        </Switch>
-        <Header />
-        {this.state.waitingGeoPermission ? (
-          <p>Loading...</p>
-        ) : !this.state.locationError ? (
+        {!this.state.waitingGeoPermission && (
           <div className={style.AppContent}>
             <Listing items={this.state.items} />
             <div style={{ width: "100%" }}>
@@ -73,10 +72,12 @@ export default class App extends Component {
               />
             </div>
           </div>
-        ) : (
-          <p>It is necessary to allow your location in order to use App.</p>
         )}
+
+        <Route path="/error" component={ErrorMessage} />
       </div>
     );
   }
 }
+
+export default withRouter(App);
