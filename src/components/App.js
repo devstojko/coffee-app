@@ -3,12 +3,13 @@ import { Route, Switch, Link, Redirect } from "react-router-dom";
 
 import appCointainer from "../containers/appContainer";
 import detailsContainer from "../containers/detailsContainer";
-import PropsRoute from "../utils/PropsRoute";
 
 import NotFound from "../components/NotFound";
 import ErrorMessage from "../components/ErrorMessage";
 
 class App extends Component {
+
+
   render() {
     return (
       <div>

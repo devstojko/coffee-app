@@ -1,15 +1,61 @@
-.Listing {
+:root {
+  --teal: #00897b;
+  --white: white;
+}
+
+.listing {
   display: flex;
   flex-direction: column;
-  height: 100vh;
-  width: 500px;
 }
 
-.ListingHeader {
-  padding: 20px;
-  background-color: color(blue alpha(20%));
+.header {
+  display: flex;
+  justify-content: space-between;
+  color: var(--white);
+  padding: 1rem 0.75rem;
+  background-color: var(--teal);
 }
 
-.ListingContent {
+.content {
   overflow-y: scroll;
+  height: calc(100vh-15.875rem);
+  padding-bottom: 1rem;
+}
+
+.sortBtn {
+  margin: 0 0.25rem;
+  background-color: transparent;
+  border: 0;
+  color: var(--white);
+  font-size: 1rem;
+}
+
+.iconBox {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.iconBox p {
+  margin: 1rem 0;
+  color: color(black alpha(24%));
+}
+
+.iconMoon {
+  width: 200px;
+  height: 200px;
+  transform: rotate(45deg);
+  fill: color(black alpha(24%));
+}
+
+@media (min-width: 1000px) {
+  .listing {
+    flex: 1;
+  }
+  .content {
+    height: 100vh;
+    padding-bottom: 0;
+  }
 }

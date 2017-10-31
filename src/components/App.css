@@ -1,5 +1,18 @@
 body {
   margin: 0;
+  overflow-y: hidden;
+  font-size: 16px;
+  font-family: "Roboto", sans-serif;
+}
+
+p {
+  margin: 0;
+  padding: 0;
+}
+
+h3 {
+  margin-top: 0;
+  margin-bottom: 1rem;
 }
 
 .App {
@@ -8,5 +21,26 @@ body {
 
 .AppContent {
   display: flex;
-  flex-direction: row;
+  flex-direction: column-reverse;
+  flex-basis: 100%;
+  width: 100%;
+}
+
+.MapWrapper {
+  width: 100%;
+  height: 12.5rem;
+}
+
+@media (min-width: 1000px) {
+  .App {
+    height: 100vh;
+    overflow-y: auto;
+  }
+  .AppContent {
+    flex-direction: row;
+  }
+  .MapWrapper {
+    flex: 2;
+    min-height: 100vh;
+  }
 }

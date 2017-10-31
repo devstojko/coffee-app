@@ -8,7 +8,7 @@ const coffeeId = "4bf58dd8d48988d1e0931735";
 export const foursquareParams = {
   categoryId: coffeeId,
   limit: 10,
-  radius: 2000,
+  radius: 1000,
   openNow: 1,
   sortByDistance: 1
 };

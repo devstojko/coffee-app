@@ -26,6 +26,11 @@ export default class appContainer extends Component {
       .then(position => {
         const lat = position.coords.latitude;
         const lng = position.coords.longitude;
+
+        // for testing
+        // const lat = 44.664289;
+        // const lng = 20.924086;
+
         foursquare.venues
           .explore({
             ll: `${lat},${lng}`,
@@ -96,7 +101,7 @@ export default class appContainer extends Component {
               sortDist={this.state.sortDist}
               sortExpe={this.state.sortExpe}
             />
-            <div style={{ width: "100%" }}>
+            <div className={style.MapWrapper}>
               <MapWithMarker
                 userPosition={this.state.ll}
                 marker={this.state.items}

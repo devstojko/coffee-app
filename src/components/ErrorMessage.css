@@ -1,0 +1,25 @@
+.box {
+  display: flex;
+  flex-wrap: wrap;
+  height: 100vh;
+  width: 90%;
+  max-width: 40rem;
+  margin: 0 auto;
+  justify-content: center;
+  align-items: center;
+}
+
+.content {
+  text-align: center;
+}
+
+.text {
+  color: color(black alpha(87%));
+}
+
+.icon {
+  display: inline-block;
+  width: 100px;
+  height: 100px;
+  fill: color(black alpha(56%));
+}

@@ -1,0 +1,45 @@
+:root {
+  --bck: color(black alpha(2%));
+}
+
+.item {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 2.5rem;
+  background-color: var(--bck);
+  margin: 0 auto;
+  overflow-y: auto;
+  height: 100vh;
+}
+
+.header {
+  margin: 3rem 0;
+  text-align: center;
+}
+
+.closeBtn {
+  cursor: pointer;
+  background-color: transparent;
+  border: 0;
+  font-size: 3rem;
+  position: absolute;
+  top: 0;
+  display: inline-block;
+}
+
+.content {
+  margin: 6rem 0;
+  max-width: 300px;
+  background-color: white;
+}
+
+.image {
+  display: block;
+  max-width: 100%;
+  margin: 0 auto;
+  height: auto;
+  border-top-left-radius: 0.25rem;
+  border-top-right-radius: 0.25rem;
+}
