@@ -1,2 +1,2 @@
 # coffee-app
-React based app that let user find nearby coffee shops using foursquare API and google maps.
+React based app that allows user to look for nearby coffee shops using foursquare API and google maps.
