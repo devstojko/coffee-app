@@ -9,23 +9,30 @@ const Listing = props => {
     <ListingItem key={item.venue.id} item={item} />
   ));
 
-  console.log(renderItems);
-
-  const arrow = props.sortDist === "MAX" ? "↑" : "↓";
-  const arrow1 = props.sortExpe === "MAX" ? "↑" : "↓";
+  const arowDirection = type => (type === "MAX" ? "↑" : "↓");
 
   return (
     <div className={style.listing}>
       <div className={style.header}>
         <span>CoffeeApp</span>
-        <span>
-          <button className={style.sortBtn} onClick={props.sortDistance}>
-            Distance {arrow}
-          </button>
-          <button className={style.sortBtn} onClick={props.sortExpens}>
-            Expensiveness {arrow1}
-          </button>
-        </span>
+        {renderItems.length !== 0 ? (
+          <span>
+            <button
+              className={style.sortBtn}
+              onClick={() => props.handleSort("dist")}
+            >
+              Distance {arowDirection(props.sortArrow.dist)}
+            </button>
+            <button
+              className={style.sortBtn}
+              onClick={() => props.handleSort("expe")}
+            >
+              Expensiveness {arowDirection(props.sortArrow.expe)}
+            </button>
+          </span>
+        ) : (
+          undefined
+        )}
       </div>
       <div className={style.content}>
         {renderItems.length === 0 ? (

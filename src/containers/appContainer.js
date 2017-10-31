@@ -12,8 +12,7 @@ export default class appContainer extends Component {
   state = {
     items: [],
     ll: {},
-    sortDist: "MAX",
-    sortExpe: "MAX",
+    sort: { dist: "MAX", expe: "MAX" },
     waitingGeoPermission: true
   };
 
@@ -49,14 +48,23 @@ export default class appContainer extends Component {
       });
   };
 
-  handleDistanceSort = () => {
-    const { sortDist } = this.state;
-    const sortDirReverse = sortDist === "MAX" ? "MIN" : "MAX";
-    const items = this.state.items.sort((a, b) => {
-      const valA = a.venue.location.distance;
-      const valB = b.venue.location.distance;
+  handleSort = type => {
+    const { sort } = this.state;
+    const sortReverse = sort[type] === "MAX" ? "MIN" : "MAX";
 
-      if (sortDist === "MAX") {
+    const items = this.state.items.sort((a, b) => {
+      let valA;
+      let valB;
+
+      if (type === "dist") {
+        valA = a.venue.location.distance;
+        valB = b.venue.location.distance;
+      } else if (type === "expe") {
+        valA = a.venue.price.tier;
+        valB = b.venue.price.tier;
+      }
+
+      if (sort[type] === "MAX") {
         return valB - valA;
       } else {
         return valA - valB;
@@ -65,27 +73,10 @@ export default class appContainer extends Component {
 
     this.setState({
       items,
-      sortDist: sortDirReverse
-    });
-  };
-
-  handleExpensSort = () => {
-    const { sortExpe } = this.state;
-    const sortDirReverse = sortExpe === "MAX" ? "MIN" : "MAX";
-    const items = this.state.items.sort((a, b) => {
-      const valA = a.venue.price.tier;
-      const valB = b.venue.price.tier;
-
-      if (sortExpe === "MAX") {
-        return valB - valA;
-      } else {
-        return valA - valB;
+      sort: {
+        ...sort,
+        [type]: sortReverse
       }
-    });
-
-    this.setState({
-      items,
-      sortExpe: sortDirReverse
     });
   };
 
@@ -96,10 +87,8 @@ export default class appContainer extends Component {
           <div className={style.AppContent}>
             <Listing
               items={this.state.items}
-              sortDistance={this.handleDistanceSort}
-              sortExpens={this.handleExpensSort}
-              sortDist={this.state.sortDist}
-              sortExpe={this.state.sortExpe}
+              handleSort={this.handleSort}
+              sortArrow={this.state.sort}
             />
             <div className={style.MapWrapper}>
               <MapWithMarker
