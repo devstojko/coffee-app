@@ -19,7 +19,8 @@
 .content {
   overflow-y: scroll;
   height: calc(100vh-15.875rem);
-  padding-bottom: 1rem;
+  padding: 1rem;
+  text-align: center;
 }
 
 .sortBtn {
