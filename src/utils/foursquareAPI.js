@@ -9,6 +9,6 @@ export const foursquareParams = {
   categoryId: coffeeId,
   limit: 10,
   radius: 1000,
-  // openNow: 1,
+  openNow: 1,
   sortByDistance: 1
 };
