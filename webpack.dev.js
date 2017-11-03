@@ -42,6 +42,14 @@ module.exports = merge(common, {
             }
           }
         ]
+      },
+      {
+        test: /\.svg$/,
+        use: [
+          {
+            loader: "url-loader"
+          }
+        ]
       }
     ]
   },

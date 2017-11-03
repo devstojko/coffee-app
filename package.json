@@ -6,7 +6,8 @@
   "scripts": {
     "start": "webpack-dev-server --open --config webpack.dev.js",
     "build": "webpack --config webpack.prod.js --progress --profile --color",
-    "surge": "npm run build && surge --domain coffee-app.surge.sh  ./dist"
+    "surge":
+      "npm run build && surge --domain https://coffee-app.surge.sh  ./dist"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",

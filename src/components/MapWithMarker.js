@@ -8,6 +8,8 @@ import {
   Marker
 } from "react-google-maps";
 
+import myLocationIcon from "../assets/icons/myLocationIcon.svg";
+
 const MapWithMarker = compose(
   withRouter,
   withProps({
@@ -29,7 +31,7 @@ const MapWithMarker = compose(
   >
     <Marker
       position={{ lat: props.userPosition.lat, lng: props.userPosition.lng }}
-      icon="http://icons.iconarchive.com/icons/icons8/windows-8/48/Maps-Street-View-icon.png"
+      icon={myLocationIcon}
     />
 
     {props.marker.map(item => {
