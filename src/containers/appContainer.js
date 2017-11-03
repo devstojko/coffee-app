@@ -6,7 +6,8 @@ import Listing from "../components/Listing";
 import { foursquare, foursquareParams } from "../utils/foursquareAPI";
 import getLocation from "../utils/geolocationApi";
 
-import style from "../components/App.css";
+import AppWrapper from "../components/AppWrapper";
+import MapWrapper from "../components/MapWrapper";
 
 export default class appContainer extends Component {
   state = {
@@ -81,24 +82,22 @@ export default class appContainer extends Component {
   };
 
   render() {
-    return (
-      <div className={style.App}>
-        {!this.state.waitingGeoPermission && (
-          <div className={style.AppContent}>
-            <Listing
-              items={this.state.items}
-              handleSort={this.handleSort}
-              sortArrow={this.state.sort}
-            />
-            <div className={style.MapWrapper}>
-              <MapWithMarker
-                userPosition={this.state.ll}
-                marker={this.state.items}
-              />
-            </div>
-          </div>
-        )}
-      </div>
+    const render = !this.state.waitingGeoPermission && (
+      <AppWrapper>
+        <Listing
+          items={this.state.items}
+          handleSort={this.handleSort}
+          sortArrow={this.state.sort}
+        />
+        <MapWrapper>
+          <MapWithMarker
+            userPosition={this.state.ll}
+            marker={this.state.items}
+          />
+        </MapWrapper>
+      </AppWrapper>
     );
+
+    return render;
   }
 }

@@ -7,19 +7,16 @@ import detailsContainer from "../containers/detailsContainer";
 import NotFound from "../components/NotFound";
 import ErrorMessage from "../components/ErrorMessage";
 
+import "./App.css";
+
 class App extends Component {
-
-
   render() {
     return (
-      <div>
-        <Switch>
-          <Route path="/error" exact component={ErrorMessage} />
-
-          <Route path="/details/:id" exact component={detailsContainer} />
-          <Route path="/" component={appCointainer} />
-        </Switch>
-      </div>
+      <Switch>
+        <Route path="/error" exact component={ErrorMessage} />
+        <Route path="/details/:id" exact component={detailsContainer} />
+        <Route path="/" component={appCointainer} />
+      </Switch>
     );
   }
 }
