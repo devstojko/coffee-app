@@ -38,7 +38,7 @@ export default class detailsContainer extends Component {
   render() {
     let venue = <p>select</p>;
     if (this.props.match.params.id) {
-      venue = <p>loading</p>;
+      venue = <p>loading...</p>;
     }
 
     if (this.state.lodaedVenue) {
