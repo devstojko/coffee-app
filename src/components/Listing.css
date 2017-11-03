@@ -17,9 +17,8 @@
 }
 
 .content {
-  overflow-y: scroll;
+  overflow-y: auto;
   height: calc(100vh-15.875rem);
-  padding: 1rem;
   text-align: center;
 }
 

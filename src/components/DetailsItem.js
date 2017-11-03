@@ -26,8 +26,6 @@ function DetailsItem(props) {
         })
       : undefined;
 
-  console.log(tips);
-
   return (
     <div className={style.item}>
       <button

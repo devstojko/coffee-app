@@ -40,7 +40,11 @@ const MapWithMarker = compose(
         <Marker
           key={id}
           position={{ lat, lng }}
-          onClick={() => props.history.push(`/details/${id}`)}
+          onClick={() =>
+            props.history.push({
+              pathname: `/details/${id}`,
+              state: item.venue.location.distance
+            })}
         />
       );
     })}

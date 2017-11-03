@@ -3,7 +3,6 @@ const webpack = require("webpack");
 const merge = require("webpack-merge");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const common = require("./webpack.common.js");
-const BrowserSyncPlugin = require("browser-sync-webpack-plugin");
 const postcssCssnext = require("postcss-cssnext");
 
 const HOST = process.env.HOST || "0.0.0.0";
