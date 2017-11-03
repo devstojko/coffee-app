@@ -35,7 +35,6 @@ module.exports = merge(common, {
                 postcssCssnext({
                   features: {
                     autoprefixer: {
-                      grid: false,
                       browsers: ["> 1%", "last 2 versions"]
                     }
                   }
@@ -56,20 +55,6 @@ module.exports = merge(common, {
       filename: "index.html",
       inject: "body"
     }),
-    // new BrowserSyncPlugin(
-    //   // BrowserSync options
-    //   {
-    //     host: HOST,
-    //     port: PORT,
-    //     proxy: PROXY
-    //   },
-    //   // plugin options
-    //   {
-    //     // prevent BrowserSync from reloading the page
-    //     // and let Webpack Dev Server take care of this
-    //     reload: false
-    //   }
-    // ),
     new webpack.NamedModulesPlugin(),
     new webpack.HotModuleReplacementPlugin()
   ]

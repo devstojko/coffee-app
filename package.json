@@ -5,7 +5,8 @@
   "license": "MIT",
   "scripts": {
     "start": "webpack-dev-server --open --config webpack.dev.js",
-    "build": "webpack --config webpack.prod.js --progress --profile --color"
+    "build": "webpack --config webpack.prod.js --progress --profile --color",
+    "surge": "npm run build && surge --domain coffee-app.surge.sh  ./dist"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",
@@ -15,8 +16,7 @@
     "babel-preset-env": "^1.6.1",
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-2": "^6.24.1",
-    "browser-sync": "^2.18.13",
-    "browser-sync-webpack-plugin": "^1.2.0",
+    "caniuse-lite": "^1.0.30000758",
     "clean-webpack-plugin": "^0.1.17",
     "css-loader": "^0.28.7",
     "extract-text-webpack-plugin": "^3.0.2",
