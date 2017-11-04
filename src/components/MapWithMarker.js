@@ -10,47 +10,65 @@ import {
 
 import myLocationIcon from "../assets/icons/myLocationIcon.svg";
 
+const keyAPI = "AIzaSyD20VEsdOtfZmtG30il5O2KTYPQk_SMNwc";
+const mapURL = `https://maps.googleapis.com/maps/api/js?key=${keyAPI}&v=3.exp`;
+
+const divEl = (
+  <div
+    style={{
+      height: "100%"
+    }}
+  />
+);
+
 const MapWithMarker = compose(
-  withRouter,
   withProps({
-    googleMapURL:
-      "https://maps.googleapis.com/maps/api/js?key=AIzaSyD20VEsdOtfZmtG30il5O2KTYPQk_SMNwc&v=3.exp&libraries=geometry,drawing,places",
-    loadingElement: <div style={{ height: "100%" }} />,
-    containerElement: <div style={{ height: "100%" }} />,
-    mapElement: <div style={{ height: "100%" }} />
+    googleMapURL: mapURL,
+    loadingElement: divEl,
+    containerElement: divEl,
+    mapElement: divEl
   }),
+  withRouter,
   withScriptjs,
   withGoogleMap
-)(props => (
-  <GoogleMap
-    defaultZoom={12}
-    defaultCenter={{
-      lat: props.userPosition.lat,
-      lng: props.userPosition.lng
-    }}
-  >
-    <Marker
-      position={{ lat: props.userPosition.lat, lng: props.userPosition.lng }}
-      icon={myLocationIcon}
-    />
+)(props => {
+  const { lat, lng } = props.userPosition;
+  return (
+    <GoogleMap
+      defaultZoom={12}
+      defaultCenter={{
+        lat,
+        lng
+      }}
+    >
+      <Marker
+        position={{
+          lat,
+          lng
+        }}
+        icon={myLocationIcon}
+      />
+      {props.marker.map(item => {
+        const { lat, lng, distance } = item.venue.location;
+        const id = item.venue.id;
 
-    {props.marker.map(item => {
-      const lat = item.venue.location.lat;
-      const lng = item.venue.location.lng;
-      const id = item.venue.id;
-      return (
-        <Marker
-          key={id}
-          position={{ lat, lng }}
-          onClick={() =>
-            props.history.push({
-              pathname: `/details/${id}`,
-              state: item.venue.location.distance
-            })}
-        />
-      );
-    })}
-  </GoogleMap>
-));
+        return (
+          <Marker
+            key={id}
+            position={{
+              lat,
+              lng
+            }}
+            onClick={() =>
+              props.history.push({
+                pathname: `/details/${id}`,
+                state: distance
+              })}
+          />
+        );
+      })}
+    </GoogleMap>
+  );
+});
 
 export default MapWithMarker;
